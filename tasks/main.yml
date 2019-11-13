@@ -2,4 +2,4 @@
 # tasks file for metricbeat
 - name: Debug task
   debug:
-    mag: 'Metricbeat works'
+    msg: 'Metricbeat works'
