@@ -1,0 +1,13 @@
+---
+default:
+  mb_home: /usr/share/metricbeat
+  mb_log_dir: /var/log/metricbeat
+  mb_conf_dir: /etc/metricbeat
+  mb_data_dir: /var/lib/metricbeat
+
+default_ssl:
+  key: /etc/pki/tls/private/server.key
+  certificate: /etc/pki/tls/certs/server.crt
+  certificate_authorities: /etc/pki/CA/ca-root.pem
+
+default_logpath: /var/log/*.log

@@ -1,2 +1,17 @@
 ---
-# handlers file for metricbeat
+# handlers file for ansible-role-metricbeat
+- name: Reload systemd configuration
+  systemd:
+    daemon_reload: true
+  become: true
+
+- name: Restart metricbeat
+  service:
+    name: '{{ metricbeat_service_name }}'
+    state: restarted
+  become: true
+
+- name: Restart metricbeat win
+  win_service:
+    name: '{{ metricbeat_service_name }}'
+    state: restarted

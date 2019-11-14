@@ -1,0 +1,43 @@
+---
+- name: Installing metricbeat on current OS
+  include_tasks: '{{ distrib_tasks }}'
+  with_first_found:
+    - '{{ ansible_os_family }}.yml'
+    - not-supported.yml
+  loop_control:
+    loop_var: distrib_tasks
+
+- name: Configure settings block
+  block:
+    - name: Setup path folders
+      file:
+        path: '{{ path_folder.value }}'
+        state: directory
+      with_dict: '{{ path }}'
+      loop_control:
+        loop_var: path_folder
+      notify: '{{ mb_service_handlers }}'
+
+    - name: Copy Configuration File
+      template:
+        src: metricbeat.yml.j2
+        dest: '{{ path.config }}/metricbeat.yml'
+        owner: root
+        group: root
+        mode: 0644
+      notify: '{{ mb_service_handlers }}'
+
+    - name: Copy service configuration file
+      template:
+        src: '{{ mb_service_script }}.j2'
+        dest: '{{ mb_service_path }}/{{ mb_service_script }}'
+        mode: '{{ mb_service_script_mode }}'
+        force: true
+      notify: '{{ mb_service_handlers }}'
+
+    - name: Start metricbeat
+      service:
+        name: metricbeat
+        state: started
+        enabled: true
+  become: true

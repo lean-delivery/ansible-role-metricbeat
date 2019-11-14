@@ -1,0 +1,7 @@
+---
+mb_service_script: '{{ metricbeat_service_name }}.service'
+mb_service_path: /usr/lib/systemd/system
+mb_service_script_mode: 0644
+mb_service_handlers:
+  - Reload systemd configuration
+  - Restart metricbeat
