@@ -1,0 +1,6 @@
+---
+mb_service_script: '{{ metricbeat_service_name }}'
+mb_service_path: /etc/init.d
+mb_service_script_mode: 0755
+mb_service_handlers:
+  - Restart metricbeat
