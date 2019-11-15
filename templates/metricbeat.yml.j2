@@ -22,15 +22,15 @@ metricbeat.config.modules:
 #==================== Elasticsearch template setting ==========================
 
 setup.template.settings:
-  index.number_of_shards: 1
-  index.codec: best_compression
+  index.number_of_shards: 3
+  #index.codec: best_compression
   #_source.enabled: false
 
 #================================ General =====================================
 
 # The name of the shipper that publishes the network data. It can be used to group
 # all the transactions sent by a single shipper in the web interface.
-#name:
+name: "{{ metricbeat_node_name }}"
 
 # The tags of the shipper are included in their own field with each
 # transaction published.
@@ -88,10 +88,32 @@ setup.kibana:
 
 # Configure what output to use when sending the data collected by the beat.
 
+#-------------------------- Output ------------------------------
+output.{{ metricbeat_output }}:
+  enabled: true
+
+
+{% if metricbeat_output == "elasticsearch" %}
+  hosts: ["{{ elasticsearch.host }}"]
+  port: {{ elasticsearch.port }}
+{% elif metricbeat_output == "logstash" %}
+  hosts: ["{{ logstash.host }}"]
+  port: {{ logstash.port }}
+{% endif %}
+  bulk_max_size: {{ metricbeat_bulk_max_size }}
+  worker: {{ metricbeat_worker }}
+
+
+ssl.enabled: {{ metricbeat_ssl_enabled }}
+{% if metricbeat_ssl_enabled and ansible_os_family == "RedHat" %}
+  ssl.certificate: {{ metricbeat_cert_file }}
+  ssl.key: {{ metricbeat_pkey_file }}
+{% endif %}
+
 #-------------------------- Elasticsearch output ------------------------------
-output.elasticsearch:
+#output.elasticsearch:
   # Array of hosts to connect to.
-  hosts: ["localhost:9200"]
+  #hosts: ["localhost:9200"]
 
   # Optional protocol and basic auth credentials.
   #protocol: "https"
@@ -122,6 +144,13 @@ processors:
   - add_cloud_metadata: ~
 
 #================================ Logging =====================================
+logging.to_syslog: {{ metricbeat_logging_to_syslog }}
+logging.to_files: {{ metricbeat_logging_to_files }}
+logging.files:
+  path: {{ path.logs }}
+  name: {{ metricbeat_logname }}
+  rotateeverybytes: {{ metricbeat_rotateeverybytes }}
+  keepfiles: {{ metricbeat_keepfiles }}
 
 # Sets log level. The default log level is info.
 # Available log levels are: error, warning, info, debug
