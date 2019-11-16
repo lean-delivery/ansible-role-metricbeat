@@ -24,6 +24,7 @@ platforms:
     ssh_user: centos
     groups:
       - rhel_family
+      - pip3
 
   - name: test-aws-centos7-metricbeat
     image: ami-9887c6e7
@@ -69,6 +70,7 @@ platforms:
     ssh_user: ubuntu
     groups:
       - debian_family
+      - pip3
 
   - name: test-aws-ubuntu18-metricbeat
     image: ami-012fd5eb46f56731f
@@ -84,6 +86,7 @@ platforms:
     ssh_user: ubuntu
     groups:
       - debian_family
+      - pip3
 
   - name: test-aws-Debian9-metricbeat
     image: ami-003f19e0e687de1cd
@@ -99,6 +102,7 @@ platforms:
     ssh_user: admin
     groups:
       - debian_family
+      - pip3
 
   - name: test-aws-Amazon-metricbeat
     image: ami-035b3c7efe6d061d5
@@ -138,6 +142,8 @@ provisioner:
       callback_whitelist: profile_tasks,timer
   inventory:
     group_vars:
+      pip3:
+        ansible_python_interpreter: /usr/bin/python3
       windows:
         ansible_connection: winrm
         ansible_password: "{{ lookup('env', 'WINRM_ADMIN_PWD') | default('M0leCule123!', true) }}"
