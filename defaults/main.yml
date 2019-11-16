@@ -1,0 +1,47 @@
+---
+elastic_branch: 7
+metricbeat_version: '{{ mb_major_version }}'
+metricbeat_last_version: 7.3.0
+metricbeat_find_last_version: false
+elastic_gpg_key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+es_repo_file: 'elastic-{{ mb_major_version }}'
+es_apt_url: 'deb https://artifacts.elastic.co/packages/{{ es_repo_name }}/apt stable main'
+es_yum_url: 'https://artifacts.elastic.co/packages/{{ es_repo_name }}/yum'
+es_win_url: 'https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-{{ metricbeat_version }}-windows-x86_64.zip'
+es_use_oss_version: true
+metricbeat_node_name: '{{ inventory_hostname }}'
+metricbeat_ssl_enabled: false
+
+mb_home: '{{ default["mb_home"] }}'
+mb_log_dir: '{{ default["mb_log_dir"] }}'
+mb_conf_dir: '{{ default["mb_conf_dir"] }}'
+mb_data_dir: '{{ default["mb_data_dir"] }}'
+
+mb_ssl_key: '{{ default_ssl["key"] }}'
+mb_ssl_certificate: '{{ default_ssl["certificate"] }}'
+mb_ssl_certificate_authorities: '{{ default_ssl["certificate_authorities"] }}'
+
+win_download_path: '{{ ansible_env.TEMP }}/metricbeat'
+
+#output customization:
+metricbeat_output: elasticsearch
+
+elasticsearch:
+  host: localhost
+  port: 9200
+
+logstash:
+  host: localhost
+  port: 5044
+
+metricbeat_service_name: metricbeat
+metricbeat_bulk_max_size: 500
+metricbeat_worker: 1
+metricbeat_logging_to_syslog: false
+metricbeat_logging_to_files: true
+metricbeat_rotateeverybytes: 104857600
+metricbeat_keepfiles: 30
+metricbeat_ignore_older: 0
+metricbeat_scan_frequency: 15s
+metricbeat_harvester_buffer_size: 65535
+metricbeat_logname: "metricbeat.log"

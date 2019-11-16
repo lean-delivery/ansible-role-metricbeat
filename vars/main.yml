@@ -1,0 +1,16 @@
+---
+# vars file for ansible-role-metricbeat
+mb_major_version: '{{ elastic_branch }}.x'
+es_repo_name: '{{ es_use_oss_version | ternary("oss-" + mb_major_version, mb_major_version) }}'
+mb_package_name: metricbeat
+
+path:
+  home: '{{ mb_home }}'
+  config: '{{ mb_conf_dir }}'
+  data: '{{ mb_data_dir }}'
+  logs: '{{ mb_log_dir }}'
+
+ssl:
+  key: '{{ mb_ssl_key }}'
+  certificate: '{{ mb_ssl_certificate }}'
+  certificate_authorities: '{{ mb_ssl_certificate_authorities }}'

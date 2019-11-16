@@ -1,0 +1,34 @@
+---
+- name: Set Metricbeat version if defined
+  set_fact:
+    mb_package_name: '{{ mb_package_name }}-{{ metricbeat_version }}'
+  when: metricbeat_version.find('.x') == -1
+
+- block:
+    - name: Importing latest logstash GPG Key
+      rpm_key:
+        key: '{{ elastic_gpg_key }}'
+        state: present
+      register: installed_key
+      until: installed_key is succeeded
+
+    - name: Add elasticsearch yum repository
+      yum_repository:
+        name: elasticsearch
+        description: Elasticsearch repository
+        file: '{{ es_repo_file }}'
+        baseurl: '{{ es_yum_url }}'
+        gpgcheck: true
+        gpgkey: '{{ elastic_gpg_key }}'
+        enabled: true
+        state: present
+
+    - name: Redhat - Installing Metricbeat package
+      yum:
+        name: '{{ mb_package_name }}'
+        state: present
+        update_cache: true
+      register: installed_package
+      until: installed_package is succeeded
+      notify: '{{ mb_service_handlers }}'
+  become: true

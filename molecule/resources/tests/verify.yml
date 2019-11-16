@@ -1,0 +1,22 @@
+---
+# Ansible tests for Linux.
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Gather the package facts
+      package_facts:
+        manager: auto
+
+    - name: Populate service facts
+      service_facts:
+
+    - name: Assert that metricbeat package is installed
+      assert:
+        that: ansible_facts.packages['metricbeat']
+
+    - name: Assert that metricbeat service is running
+      assert:
+        that: |
+                "'running' in ansible_facts.services['metricbeat.service'].state"
+                or
+                "'running' in ansible_facts.services['metricbeat'].state"

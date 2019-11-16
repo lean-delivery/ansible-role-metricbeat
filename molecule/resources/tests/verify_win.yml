@@ -1,0 +1,22 @@
+---
+# Ansible tests for Windows.
+- name: Verify
+  hosts: all
+  tasks:
+    - name: Check if a service is installed
+      win_service:
+        name: metricbeat
+      register: mb_service_info
+
+    - name: Check metricbeat version
+      win_command: metricbeat version
+      register: metricbeat_ver
+      changed_when: false
+
+    - name: Debug metricbeat version
+      debug:
+        var: metricbeat_ver.stdout
+
+    - name: Assert that metricbeat package is installed
+      assert:
+        that: "'running' in mb_service_info.state"
