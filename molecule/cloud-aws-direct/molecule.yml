@@ -70,20 +70,20 @@ platforms:
     groups:
       - debian_family
 
-#  - name: test-aws-ubuntu18-metricbeat
-#    image: ami-012fd5eb46f56731f
-#    platform: ubuntu18
-#    instance_type: m5.large
-#    region: us-east-1
-#    vpc_subnet_id: subnet-0f2b9cd66faea38af
-#    assign_public_ip: false
-#    security_group_name:
-#      - default
-#    spot_price: 0.04
-#    wait_timeout: 1800
-#    ssh_user: ubuntu
-#    groups:
-#      - debian_family
+  - name: test-aws-ubuntu18-metricbeat
+    image: ami-012fd5eb46f56731f
+    platform: ubuntu18
+    instance_type: m5.large
+    region: us-east-1
+    vpc_subnet_id: subnet-0f2b9cd66faea38af
+    assign_public_ip: false
+    security_group_name:
+      - default
+    spot_price: 0.04
+    wait_timeout: 1800
+    ssh_user: ubuntu
+    groups:
+      - debian_family
 
   - name: test-aws-Debian9-metricbeat
     image: ami-003f19e0e687de1cd
@@ -130,33 +130,6 @@ platforms:
     groups:
       - rhel_family
 
-  # - name: test-aws-Windows2016-metricbeat
-  #   image_id: ami-00a20f508263efd30
-  #   platform: windows2016core
-  #   region: us-east-1
-  #   instance_type: m5.large
-  #   vpc_subnet_id: subnet-0f2b9cd66faea38af
-  #   assign_public_ip: false
-  #   spot_price: 0.14
-  #   security_group_name:
-  #     - default
-  #   wait_timeout: 1800
-  #   groups:
-  #     - windows
-
-  # - name: test-aws-Windows2019-metricbeat
-  #   image_id: ami-0477b9335a5a75438
-  #   platform: windows2019core
-  #   region: us-east-1
-  #   instance_type: m5.large
-  #   vpc_subnet_id: subnet-0f2b9cd66faea38af
-  #   assign_public_ip: false
-  #   spot_price: 0.14
-  #   security_group_name:
-  #     - default
-  #   wait_timeout: 1800
-  #   groups:
-  #     - windows
 provisioner:
   name: ansible
   log: true

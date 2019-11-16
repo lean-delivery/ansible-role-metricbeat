@@ -30,7 +30,7 @@ Lint:
   tags:
     - lint
 
-Docker metricbeat:
+.Docker metricbeat:
   stage: deployment test
   script:
     - molecule test -s default
@@ -46,7 +46,7 @@ AWS metricbeat:
   tags:
     - aws
 
-AZURE metricbeat:
+.AZURE metricbeat:
   stage: deployment test
   script:
     - molecule test -s cloud-azure-direct
