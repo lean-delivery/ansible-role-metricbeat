@@ -30,7 +30,7 @@ Role tasks
 Requirements
 ------------
 
-- Minimal Version of the ansible for installation: 2.5
+- Minimal Version of the ansible for installation: 2.7
  - **Supported OS**:
    - CentOS
      - 7, 8

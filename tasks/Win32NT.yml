@@ -19,7 +19,7 @@
 
 - name: Download metricbeat
   win_get_url:
-    url: 'https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-{{ metricbeat_version }}-windows-x86_64.zip'
+    url: '{{ es_win_url }}'
     dest: '{{ win_download_path }}\metricbeat.zip'
     force: false
   register: download_win_package

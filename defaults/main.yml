@@ -7,6 +7,7 @@ elastic_gpg_key: https://artifacts.elastic.co/GPG-KEY-elasticsearch
 es_repo_file: 'elastic-{{ mb_major_version }}'
 es_apt_url: 'deb https://artifacts.elastic.co/packages/{{ es_repo_name }}/apt stable main'
 es_yum_url: 'https://artifacts.elastic.co/packages/{{ es_repo_name }}/yum'
+es_win_url: 'https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-{{ metricbeat_version }}-windows-x86_64.zip'
 es_use_oss_version: true
 metricbeat_node_name: '{{ inventory_hostname }}'
 metricbeat_ssl_enabled: false
@@ -21,8 +22,6 @@ mb_ssl_certificate: '{{ default_ssl["certificate"] }}'
 mb_ssl_certificate_authorities: '{{ default_ssl["certificate_authorities"] }}'
 
 win_download_path: '{{ ansible_env.TEMP }}/metricbeat'
-
-input_logpath: '{{ default_logpath }}'
 
 #output customization:
 metricbeat_output: elasticsearch
