@@ -18,17 +18,23 @@ galaxy_info:
     - name: Ubuntu
       versions:
         - xenial
+        - bionic
     - name: Debian
       versions:
         - stretch
     - name: "Amazon"
       versions:
         - "all"
+    - name: "Windows"
+      versions:
+        - "all"
 
   galaxy_tags:
     - metricbeat
+    - beats
     - elasticsearch
     - elk
     - metrics
     - monitoring
     - system
+    - windows

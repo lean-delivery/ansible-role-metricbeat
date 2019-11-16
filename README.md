@@ -4,8 +4,8 @@ Metricbeat Role
 [![Build Status](https://travis-ci.org/lean-delivery/ansible-role-metricbeat.svg?branch=master)](https://travis-ci.org/lean-delivery/ansible-role-metricbeat)
 [![Build Status](https://gitlab.com/lean-delivery/ansible-role-metricbeat/badges/master/pipeline.svg)](https://gitlab.com/lean-delivery/ansible-role-metricbeat/pipelines)
 [![Galaxy](https://img.shields.io/badge/galaxy-lean__delivery.metricbeat-blue.svg)](https://galaxy.ansible.com/lean_delivery/metricbeat)
-![Ansible](https://img.shields.io/ansible/role/d/role_id.svg)
-![Ansible](https://img.shields.io/badge/dynamic/json.svg?label=min_ansible_version&url=https%3A%2F%2Fgalaxy.ansible.com%2Fapi%2Fv1%2Froles%2Frole_id%2F&query=$.min_ansible_version)
+![Ansible](https://img.shields.io/ansible/role/d/44667.svg)
+![Ansible](https://img.shields.io/badge/dynamic/json.svg?label=min_ansible_version&url=https%3A%2F%2Fgalaxy.ansible.com%2Fapi%2Fv1%2Froles%2F44667%2F&query=$.min_ansible_version)
 
 
 ## Summary
@@ -32,10 +32,11 @@ Requirements
 
 - Minimal Version of the ansible for installation: 2.7
  - **Supported OS**:
-   - CentOS
+   - EL (RedHat, CentOS)
      - 7, 8
    - Ubuntu
      - 16.04
+     - 18.04
    - Debian
      - 8, 9
    - Windows Server
@@ -184,7 +185,8 @@ Example Playbook
 
 License
 -------
-Apache
+Apache   
+[![License](https://img.shields.io/badge/license-Apache-green.svg?style=flat)](https://raw.githubusercontent.com/lean-delivery/ansible-role-metricbeat/master/LICENSE)
 
 
 Author Information
